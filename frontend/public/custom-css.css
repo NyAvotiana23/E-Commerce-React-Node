@@ -1,0 +1,16 @@
+.productCard {
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: bisque;
+  color: black;
+}
+.productCard:hover {
+  background-color: aliceblue;
+  transition-duration: 1s;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
