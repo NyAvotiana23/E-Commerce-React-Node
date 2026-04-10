@@ -3,10 +3,9 @@ import apiFetch from "./api-calls.js";
 export async function getProducts() {
   try {
     const result = await apiFetch("/product");
-    console.log("Test endpoint response:", result);
     return result;
   } catch (error) {
-    console.error("Test endpoint failed:", error.message);
+    console.error("getProducts failed:", error.message);
     throw error;
   }
 }
@@ -14,10 +13,34 @@ export async function getProducts() {
 export async function getProductById(id) {
   try {
     const result = await apiFetch(`/product/${id}`);
-    console.log("Test endpoint response:", result);
     return result;
   } catch (error) {
-    console.error("Test endpoint failed:", error.message);
+    console.error("getProductById failed:", error.message);
+    throw error;
+  }
+}
+
+export async function addProduct(data) {
+  try {
+    const result = await apiFetch("/product", {
+      method: "POST",
+      body: JSON.stringify(data), // 👈 send as JSON
+    });
+    return result;
+  } catch (error) {
+    console.error("addProduct failed:", error.message);
+    throw error;
+  }
+}
+
+export async function deleteProduct(id) {
+  try {
+    const result = await apiFetch(`/product/${id}`, {
+      method: "DELETE",
+    });
+    return result;
+  } catch (error) {
+    console.error("deleteProduct failed:", error.message);
     throw error;
   }
 }

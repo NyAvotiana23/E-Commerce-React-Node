@@ -6,7 +6,8 @@ export default function RootLayout() {
       <nav>
         <Link to="/">Accueil</Link>
         <Link to="/products">Products</Link>
-
+        <Link to="/auth/login">Login</Link>
+        <Link to="/auth/sign-up">Sign up</Link>
       </nav>
 
       <main>

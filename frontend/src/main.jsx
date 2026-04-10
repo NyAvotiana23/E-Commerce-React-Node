@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { router } from "./router/router.jsx";
 import { RouterProvider } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-
+import "./index.css";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HelmetProvider>

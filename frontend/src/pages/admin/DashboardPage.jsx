@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ErrorPage(props) {
+function DashboardPage(props) {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function ErrorPage(props) {
     );
 }
 
-export default ErrorPage;
+export default DashboardPage;

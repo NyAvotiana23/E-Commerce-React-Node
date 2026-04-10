@@ -25,6 +25,7 @@ const staticProductData = [
     price: 2600,
   },
 ];
+
 router.get("/", (req, res) => {
   res.json({
     status: "ok",
@@ -33,12 +34,37 @@ router.get("/", (req, res) => {
   });
 });
 
+router.post("/", (req, res) => {
+  const { name, category, animal, price } = req.body; // 👈 body is already parsed
+
+  // Basic validation
+  if (!name || !category || !animal || price == null) {
+    return res.status(400).json({
+      status: "error",
+      message: "Champs manquants : name, category, animal, price requis",
+    });
+  }
+
+  const newProduct = {
+    id: staticProductData.length + 1, // 👈 auto-generate id
+    name,
+    category,
+    animal,
+    price: Number(price),
+  };
+
+  staticProductData.push(newProduct);
+
+  res.status(201).json({
+    status: "ok",
+    message: "Produit ajouté avec succès",
+    data: newProduct, // 👈 return the created product
+    timestamp: new Date().toISOString(),
+  });
+});
 
 router.get("/:id", (req, res) => {
-  // Convert string param to a number
   const id = Number(req.params.id);
-
-  // Use .find() for a single object
   const product = staticProductData.find((p) => p.id === id);
 
   if (product) {
@@ -48,13 +74,34 @@ router.get("/:id", (req, res) => {
       timestamp: new Date().toISOString(),
     });
   } else {
-    // It's good practice to send a 404 status code for "Not Found"
     res.status(404).json({
       status: "not found",
       message: `Produit non trouvé avec l'id : ${id}`,
       timestamp: new Date().toISOString(),
     });
   }
+});
+
+// 👇 DELETE route
+router.delete("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const index = staticProductData.findIndex((p) => p.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({
+      status: "not found",
+      message: `Produit non trouvé avec l'id : ${id}`,
+      timestamp: new Date().toISOString(),
+    });
+  }
+
+  staticProductData.splice(index, 1); // 👈 removes 1 element at index
+
+  res.json({
+    status: "ok",
+    message: `Produit supprimé avec succès`,
+    timestamp: new Date().toISOString(),
+  });
 });
 
 export default router;

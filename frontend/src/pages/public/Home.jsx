@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { testBackend } from "../api/data-test.js";
+import { testBackend } from "../../api/data-test.js";
 
 function Home(props) {
   const [testResult, setTestResult] = useState(null);

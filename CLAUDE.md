@@ -22,11 +22,11 @@ Monorepo with a Node.js/Express backend and a React/Vite frontend, unified into 
   - `src/layouts/` — Layout components (RootLayout)
   - `src/router/` — React Router configuration
 
-## Commands
+## Development Commands
 
-### Backend Development
+### Backend
 ```bash
-# Install dependencies (first time or after package changes)
+# Install dependencies
 cd backend
 npm install
 
@@ -37,9 +37,9 @@ npm run dev
 npm start
 ```
 
-### Frontend Development
+### Frontend
 ```bash
-# Install dependencies (first time or after package changes)
+# Install dependencies
 cd frontend
 npm install
 
@@ -82,11 +82,7 @@ docker run -p 3000:3000 kit-alika
 docker-compose up --build
 ```
 
-### Environment Variables
-- Backend: `PORT` (defaults to 3000)
-- Frontend: `VITE_API_BASE` (defaults to "/api" in development, used in production Docker build)
-
-## Architecture
+## Key Architecture Points
 
 ### Backend
 - Express 5 with CORS middleware
@@ -94,12 +90,13 @@ docker-compose up --build
 - API routes prefixed with `/api/`
 - JSON body parsing enabled
 - Static product data served from memory (no database)
+- Non-API routes serve `index.html` for client-side routing
 
 ### Frontend
 - Vite development server with proxy forwarding `/api` requests to backend
 - React Router for client-side routing
-- Centralized API service (`api-calls.js`) with error handling
-- Environment-aware API base URL
+- Centralized API service (`api-calls.js`) with automatic JSON parsing and error handling
+- Environment-aware API base URL via `VITE_API_BASE`
 - SEO management via react-helmet-async
 
 ### Docker Production Build
